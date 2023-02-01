@@ -7,6 +7,7 @@
     --primary-color-opacity: #77c9d440;
     --secondary-color: #57bc90;
     --third-color: #015249;
+    --background-color: #edf2f8;
     --black-color: #030303;
     --white-color: #ffff;
     --gray-color: #6b7688;
@@ -18,4 +19,8 @@
     padding: 0;
     margin: 0;
     scroll-behavior: smooth;
+}
+
+body {
+    background-color: var(--background-color);
 }
