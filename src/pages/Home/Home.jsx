@@ -1,8 +1,16 @@
 import React from 'react';
-import Navbar from '../../components/Navbar/Navbar';
+import PostSection from '../../components/PostSection/PostSection';
+
+import './Home.scss';
 
 function Home() {
-    return <Navbar />;
+    return (
+        <div className="home-container">
+            <div className="profile-section" />
+            <PostSection />
+            <div className="right-section" />
+        </div>
+    );
 }
 
 export default Home;
