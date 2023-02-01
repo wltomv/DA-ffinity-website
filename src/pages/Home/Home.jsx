@@ -1,5 +1,5 @@
 import React from 'react';
-import PostSection from '../../components/PostSection/PostSection';
+import PostSection from '../../containers/PostSection/PostSection';
 
 import './Home.scss';
 
