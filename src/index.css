@@ -4,8 +4,12 @@
     --font-base: 'Cormorant Upright', serif;
     --font-alt: 'Open Sans', sans-serif;
     --primary-color: #77c9d4;
+    --primary-color-opacity: #77c9d440;
     --secondary-color: #57bc90;
+    --third-color: #015249;
     --black-color: #030303;
+    --white-color: #ffff;
+    --gray-color: #6b7688;
     --lightGray-color: #e4e4e4;
 }
 
