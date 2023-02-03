@@ -1,0 +1,14 @@
+.circle {
+    width: 42px;
+    height: 42px;
+    clip-path: circle(20px);
+    border: 1px solid #454545;
+    background: #454545;
+
+    img {
+        clip-path: circle(19px);
+        object-fit: cover;
+        width: 100%;
+        height: 100%;
+    }
+}
