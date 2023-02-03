@@ -23,6 +23,13 @@
         "import/no-extraneous-dependencies": [
             "error",
             { "devDependencies": true }
+        ],
+        "object-curly-newline": [
+            "error",
+            {
+                "ObjectExpression": { "multiline": true, "minProperties": 4 },
+                "ObjectPattern": { "multiline": true }
+            }
         ]
     }
 }
