@@ -88,11 +88,6 @@
     align-items: center;
 
     .app__navbar-toogle-avatar {
-        img {
-            width: auto;
-            height: 40px;
-        }
-
         @media screen and (max-width: 900px) {
             padding-right: 1rem;
         }

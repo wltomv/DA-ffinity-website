@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { HiMenuAlt4, HiX } from 'react-icons/hi';
 import { motion } from 'framer-motion';
+import Avatar from '../Avatar/Avatar';
+
 import images from '../../constants/images';
 import './Navbar.scss';
 
@@ -23,8 +25,9 @@ function Navbar() {
             </ul>
             <div className="app__navbar-toogle">
                 <div className="app__navbar-toogle-avatar">
-                    <img src={images.userImg} alt="" />
+                    <Avatar imgSrc={images.userImg} />
                 </div>
+
                 <div className="app__navbar-menu">
                     <HiMenuAlt4 onClick={() => setToggleMenu(true)} />
 
