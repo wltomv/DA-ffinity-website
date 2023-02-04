@@ -33,12 +33,13 @@
             align-items: flex-end;
             justify-content: center;
 
-            div {
+            button {
                 padding: 0.3rem;
                 width: 25%;
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                border: none;
                 border-radius: 0.5rem;
 
                 span {
