@@ -1,6 +1,7 @@
-import './App.scss';
 import Home from './pages/Home/Home';
 import Navbar from './components/Navbar/Navbar';
+
+import './App.scss';
 
 function App() {
     return (
