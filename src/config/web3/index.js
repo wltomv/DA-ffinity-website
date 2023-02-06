@@ -1,8 +1,8 @@
-import { Web3Provider } from '@ethersproject/providers';
+import Web3 from 'web3';
 import { InjectedConnector } from '@web3-react/injected-connector';
 
-const injected = new InjectedConnector({ supportedChainIds: [1, 3, 4, 5, 42] });
+const injected = new InjectedConnector({ supportedChainIds: [1, 5, 1337] });
 
-const getLibrary = (provider) => new Web3Provider(provider);
+const getLibrary = (provider) => new Web3(provider);
 
 export { getLibrary, injected };
