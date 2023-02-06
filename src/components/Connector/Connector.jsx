@@ -54,7 +54,7 @@ function Connector() {
                     disabled={isUnsupportedChain}
                     className="format"
                 >
-                    {isUnsupportedChain ? 'Red o soportada' : 'Conectar'}
+                    {isUnsupportedChain ? 'Red no soportada' : 'Conectar'}
                 </button>
             )}
         </div>
