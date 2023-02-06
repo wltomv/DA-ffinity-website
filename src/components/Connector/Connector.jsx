@@ -2,6 +2,8 @@ import { useCallback, useEffect, useState } from 'react';
 import { UnsupportedChainIdError, useWeb3React } from '@web3-react/core';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { injected } from '../../config/web3';
+import useTrimAddress from '../../hooks/useTrimAddress';
+
 import './Connector.scss';
 
 function Connector() {
@@ -35,11 +37,12 @@ function Connector() {
         if (localStorage.getItem('isConnected') === 'true') connect();
     }, [connect]);
 
+    const shortAddress = useTrimAddress(account);
     return (
         <div className="connector">
             {active ? (
                 <div className="format connector-info">
-                    {account}
+                    {`${shortAddress} ${balance}`}
                     <button type="button" onClick={disconnect}>
                         <AiOutlineCloseCircle />
                     </button>
@@ -52,9 +55,6 @@ function Connector() {
                     className="format"
                 >
                     {isUnsupportedChain ? 'Red o soportada' : 'Conectar'}
-                    {active && (
-                        <span>{`cuenta: ${account} Balance: ${balance}`}</span>
-                    )}
                 </button>
             )}
         </div>
