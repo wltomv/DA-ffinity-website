@@ -1,0 +1,42 @@
+.page {
+    width: 100vw;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .login {
+        display: flex;
+        width: 70%;
+        height: 80%;
+
+        &__bg {
+            width: 60%;
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: fill;
+            }
+        }
+
+        &__info {
+            width: 40%;
+            height: 100%;
+        }
+
+        @media screen and (max-width: 800px) {
+            width: 600px;
+        }
+        @media screen and (max-width: 650px) {
+            width: 80%;
+            &__bg {
+                display: none;
+            }
+            &__info {
+                width: 100%;
+            }
+        }
+    }
+}
