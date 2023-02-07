@@ -25,9 +25,9 @@ function Connector() {
     };
 
     const getBalance = useCallback(async () => {
-        const toSet = await library.getBalance(account);
+        const toSet = await library.eth.getBalance(account);
         setBalance((toSet / 1e18).toFixed(2));
-    }, [library, account]);
+    }, [library?.eth, account]);
 
     useEffect(() => {
         if (active) getBalance();
