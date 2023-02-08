@@ -13,9 +13,9 @@ function Login() {
                 </div>
                 <div className="login__info">
                     <FormBox
-                        footerMessage="Aun no tienes una cuenta"
+                        footerMessage="¿Todavía no tienes una cuenta?"
                         linkMessage="Crea una ahora"
-                        link="/"
+                        link="/login"
                     >
                         <LoginForm />
                     </FormBox>
