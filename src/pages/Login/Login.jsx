@@ -1,3 +1,4 @@
+import FormBox from '../../containers/FormBox/FormBox';
 import LoginForm from '../../components/LoginForm/LoginForm';
 import images from '../../constants/images';
 
@@ -11,7 +12,13 @@ function Login() {
                     <img src={images.slider} alt="" />
                 </div>
                 <div className="login__info">
-                    <LoginForm />
+                    <FormBox
+                        footerMessage="Aun no tienes una cuenta"
+                        linkMessage="Crea una ahora"
+                        link="/"
+                    >
+                        <LoginForm />
+                    </FormBox>
                 </div>
             </div>
         </div>
