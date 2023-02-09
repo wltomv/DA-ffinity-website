@@ -27,7 +27,7 @@ function Register() {
                     <FormBox
                         footerMessage="¿Ya tienes una cuenta?"
                         linkMessage="inicia sesión"
-                        link="/registro"
+                        link="/login"
                     >
                         <RegisterForm />
                     </FormBox>

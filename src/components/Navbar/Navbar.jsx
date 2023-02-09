@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import { HiMenuAlt4, HiX } from 'react-icons/hi';
 import { motion } from 'framer-motion';
 import Avatar from '../Avatar/Avatar';
@@ -8,6 +9,12 @@ import './Navbar.scss';
 
 function Navbar() {
     const links = ['Inicio', 'Perfil'];
+
+    const routes = [
+        { to: '/', text: 'Inicio' },
+        { to: '/profile', text: 'Perfil' },
+    ];
+
     const [toggleMenu, setToggleMenu] = useState(true);
 
     return (
@@ -16,10 +23,17 @@ function Navbar() {
                 <img src={images.logo} alt="" />
             </div>
             <ul className="app__navbar-links">
-                {links.map((item) => (
-                    <li className="app__flex p-text" key={`link-${item}`}>
+                {routes.map((route) => (
+                    <li className="app__flex p-text" key={`link-${route.text}`}>
                         <div />
-                        <a href={`#${item}`}>{item}</a>
+                        <NavLink
+                            to={route.to}
+                            className={({ isActive }) =>
+                                isActive ? 'active' : undefined
+                            }
+                        >
+                            {route.text}
+                        </NavLink>
                     </li>
                 ))}
             </ul>
@@ -38,13 +52,13 @@ function Navbar() {
                         >
                             <HiX onClick={() => setToggleMenu(false)} />
                             <ul>
-                                {links.map((item) => (
-                                    <li key={item}>
+                                {links.map((route) => (
+                                    <li key={route}>
                                         <a
-                                            href={`#${item}`}
+                                            href={`#${route}`}
                                             onClick={() => setToggleMenu(false)}
                                         >
-                                            {item}
+                                            {route}
                                         </a>
                                     </li>
                                 ))}

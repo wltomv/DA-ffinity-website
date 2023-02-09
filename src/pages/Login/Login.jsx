@@ -15,7 +15,7 @@ function Login() {
                     <FormBox
                         footerMessage="¿Todavía no tienes una cuenta?"
                         linkMessage="Crea una ahora"
-                        link="/login"
+                        link="/register"
                     >
                         <LoginForm />
                     </FormBox>

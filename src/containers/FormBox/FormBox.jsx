@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import './FormBox.scss';
 
 function FormBox({ children, footerMessage, linkMessage, link }) {
@@ -10,7 +11,7 @@ function FormBox({ children, footerMessage, linkMessage, link }) {
             <div className="container-form">{children}</div>
             <span>
                 {footerMessage}
-                <a href={link}>{linkMessage}</a>
+                <Link to={link}>{linkMessage}</Link>
             </span>
         </div>
     );

@@ -7,7 +7,8 @@
         "plugin:react/recommended",
         "plugin:prettier/recommended",
         "airbnb",
-        "airbnb/hooks"
+        "airbnb/hooks",
+        "eslint-config-prettier"
     ],
     "overrides": [],
     "parserOptions": {
@@ -32,6 +33,7 @@
             }
         ],
         "comma-dangle": "off",
-        "operator-linebreak": ["error", "after"]
+        "operator-linebreak": ["error", "after"],
+        "no-confusing-arrow": "off"
     }
 }

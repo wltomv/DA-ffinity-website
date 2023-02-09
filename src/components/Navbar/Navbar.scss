@@ -182,3 +182,8 @@
         display: none;
     }
 }
+
+.active {
+    box-shadow: 0 2px 0 transparent, 0 2px 0 var(--third-color);
+    color: var(--secondary-color) !important;
+}

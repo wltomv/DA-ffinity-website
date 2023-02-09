@@ -1,15 +1,11 @@
-import Home from './pages/Home/Home';
-import Navbar from './components/Navbar/Navbar';
-
+import { createHashRouter, RouterProvider } from 'react-router-dom';
+import routesConfig from './config/routes';
 import './App.scss';
 
 function App() {
-    return (
-        <div className="App">
-            <Navbar />
-            <Home />
-        </div>
-    );
+    const router = createHashRouter(routesConfig);
+
+    return <RouterProvider router={router} />;
 }
 
 export default App;
