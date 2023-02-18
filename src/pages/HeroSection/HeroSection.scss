@@ -1,0 +1,64 @@
+.heropg {
+    background-image: url(../../assets/hero.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &__connect {
+        position: absolute;
+        top: 20px;
+        right: 30px;
+    }
+
+    &__content {
+        display: flex;
+        gap: 1rem;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 80%;
+        padding: 1rem;
+        border: 3px solid #57bc90;
+
+        h1 {
+            color: white;
+            font-size: 5rem;
+            font-weight: 700;
+            span {
+                color: #015249;
+            }
+            text-align: center;
+        }
+        > span {
+            font-size: 1.5rem;
+            font-style: italic;
+            text-align: center;
+            letter-spacing: 0.15em;
+        }
+
+        &-start {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            align-items: center;
+
+            a {
+                padding: 0.7rem;
+                background-color: var(--secondary-color);
+                color: var(--white-color);
+                text-decoration: none;
+                border-radius: 5px;
+                font-weight: bold;
+                letter-spacing: 0.05em;
+
+                &:hover {
+                    background-color: var(--third-color);
+                }
+            }
+        }
+    }
+}

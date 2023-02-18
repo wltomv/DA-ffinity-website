@@ -1,9 +1,14 @@
 import AppLayout from '../../containers/AppLayout/AppLayout';
+import HeroSection from '../../pages/HeroSection/HeroSection';
 import Home from '../../pages/Home/Home';
 import Login from '../../pages/Login/Login';
 import Register from '../../pages/Register/Register';
 
 const routesConfig = [
+    {
+        path: '/',
+        element: <HeroSection />,
+    },
     {
         path: '/login',
         element: <Login />,
@@ -16,7 +21,7 @@ const routesConfig = [
         element: <AppLayout />,
         children: [
             {
-                path: '/',
+                path: '/home',
                 element: <Home />,
             },
             {
