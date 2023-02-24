@@ -5,6 +5,8 @@ import { injected } from '../../config/web3';
 import useTrimAddress from '../../hooks/useTrimAddress';
 
 import './Connector.scss';
+import notify from '../../utils/notify';
+import { toastTypes } from '../../constants';
 
 function Connector() {
     const [balance, setBalance] = useState(0);
@@ -17,11 +19,13 @@ function Connector() {
     const connect = useCallback(() => {
         activate(injected);
         localStorage.setItem('isConnected', 'true');
+        // notify(toastTypes.success, 'Conexión exitosa');
     }, [activate]);
 
     const disconnect = () => {
         deactivate();
         localStorage.removeItem('isConnected');
+        notify(toastTypes.warning, 'Wallet desconectada');
     };
 
     const getBalance = useCallback(async () => {
