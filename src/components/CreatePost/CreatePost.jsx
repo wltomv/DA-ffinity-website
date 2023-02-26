@@ -1,30 +1,72 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { FaImages } from 'react-icons/fa';
 import { BiImageAdd } from 'react-icons/bi';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { Web3Storage } from 'web3.storage';
+import { useWeb3React } from '@web3-react/core';
+import readfile from '../../utils/readFile';
 import images from '../../constants/images';
 import Avatar from '../Avatar/Avatar';
 import './CreatePost.scss';
+import useContract from '../../hooks/useContract';
+
+import DaffiArtifact from '../../config/artifacts/DAffinity.contract';
+import notify from '../../utils/notify';
+import { PostContext } from '../../context/PostsContext';
 
 function CreatePost() {
+    const token = import.meta.env.VITE_IPFS_DAFFI_TOKEN;
+    const storage = new Web3Storage({ token });
+    const daffiContract = useContract(DaffiArtifact);
+    const { account } = useWeb3React();
+    const { setPosts } = useContext(PostContext);
+
     const [addMedia, setAddMedia] = useState(false);
     const [media, setMedia] = useState({});
-
-    const readfile = (e) => {
-        const { files } = e.currentTarget;
-        const file = files[0];
-        const url = URL.createObjectURL(file);
-        return { name: file.name, url, file };
-    };
+    const [content, setContent] = useState('');
 
     const changeInput = (e) => {
         const newImage = readfile(e);
         setMedia(newImage);
     };
 
+    const handleChangeContent = (e) => {
+        const val = e.target.value;
+        setContent(val);
+    };
+
     const deleteImage = () => {
         setMedia({});
         setAddMedia(false);
+    };
+
+    const publish = async () => {
+        const storageOptions = { wrapWithDirectory: false };
+        const cid = await storage.put([media.file], storageOptions);
+
+        daffiContract.methods
+            .newPost(cid, content)
+            .send({ from: account })
+            .on('transactionHash', (txHash) => {
+                notify('info', `transaccion enviada, hash: ${txHash}`);
+            })
+            .on('receipt', ({ events }) => {
+                notify('success', 'publicacion creada');
+                const { returnValues } = events.PostCreated;
+                const newPost = {
+                    id: returnValues.id,
+                    image: `https://${returnValues.ipfsHash}.ipfs.w3s.link`,
+                    likes: returnValues.likes,
+                    content: returnValues.description,
+                };
+                setPosts((posts) => [newPost, ...posts]);
+
+                setMedia({});
+                setContent('');
+            })
+            .on('error', (error) => {
+                notify('error', `transaccion fallida ${error.message}`);
+            });
     };
 
     return (
@@ -40,10 +82,11 @@ function CreatePost() {
                     </button>
                 )}
             </div>
-            <div
-                contentEditable="true"
+            <textarea
                 className="create__post-content"
                 placeholder="Contenido de la publicación..."
+                onChange={handleChangeContent}
+                value={content}
             />
             {addMedia && (
                 <div className="create__post-media">
@@ -77,7 +120,9 @@ function CreatePost() {
             )}
 
             <div className="create__post-submit">
-                <button type="button">Publicar</button>
+                <button type="button" onClick={() => publish()}>
+                    Publicar
+                </button>
             </div>
         </div>
     );

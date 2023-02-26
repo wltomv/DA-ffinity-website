@@ -1,4 +1,5 @@
 import AppLayout from '../../containers/AppLayout/AppLayout';
+import { PostsProvider } from '../../context/PostsContext';
 import HeroSection from '../../pages/HeroSection/HeroSection';
 import Home from '../../pages/Home/Home';
 import Login from '../../pages/Login/Login';
@@ -18,7 +19,11 @@ const routesConfig = [
         element: <Register />,
     },
     {
-        element: <AppLayout />,
+        element: (
+            <PostsProvider>
+                <AppLayout />
+            </PostsProvider>
+        ),
         children: [
             {
                 path: '/home',
