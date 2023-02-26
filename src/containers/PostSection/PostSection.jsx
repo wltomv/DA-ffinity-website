@@ -1,15 +1,16 @@
 import { useContext } from 'react';
+import Loader from '../../components/Loader/Loader';
 import NewPost from '../../components/NewPost/NewPost';
 import { PostContext } from '../../context/PostsContext';
 import Posts from '../Posts/Posts';
 import './PostSection.scss';
 
 function PostSection() {
-    const { posts } = useContext(PostContext);
+    const { posts, loading } = useContext(PostContext);
     return (
         <div className="Post-section">
             <NewPost />
-            <Posts posts={posts} />
+            {!loading ? <Posts posts={posts} /> : <Loader />}
         </div>
     );
 }

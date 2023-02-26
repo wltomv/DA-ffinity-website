@@ -13,6 +13,7 @@ import useContract from '../../hooks/useContract';
 import DaffiArtifact from '../../config/artifacts/DAffinity.contract';
 import notify from '../../utils/notify';
 import { PostContext } from '../../context/PostsContext';
+import Loader from '../Loader/Loader';
 
 function CreatePost() {
     const token = import.meta.env.VITE_IPFS_DAFFI_TOKEN;
@@ -24,6 +25,7 @@ function CreatePost() {
     const [addMedia, setAddMedia] = useState(false);
     const [media, setMedia] = useState({});
     const [content, setContent] = useState('');
+    const [sendPost, setSendPost] = useState(false);
 
     const changeInput = (e) => {
         const newImage = readfile(e);
@@ -41,6 +43,7 @@ function CreatePost() {
     };
 
     const publish = async () => {
+        setSendPost(true);
         const storageOptions = { wrapWithDirectory: false };
         const cid = await storage.put([media.file], storageOptions);
 
@@ -63,67 +66,84 @@ function CreatePost() {
 
                 setMedia({});
                 setContent('');
+
+                setSendPost(false);
             })
             .on('error', (error) => {
                 notify('error', `transaccion fallida ${error.message}`);
+                setSendPost(false);
             });
     };
 
     return (
-        <div className="create__post">
-            <div className="create__post-options">
-                <div className="autor">
-                    <Avatar imgSrc={images.userImg} />
-                    <span>autor</span>
-                </div>
-                {!addMedia && (
-                    <button type="button" onClick={() => setAddMedia(true)}>
-                        <FaImages size={32} />
-                    </button>
-                )}
-            </div>
-            <textarea
-                className="create__post-content"
-                placeholder="Contenido de la publicación..."
-                onChange={handleChangeContent}
-                value={content}
-            />
-            {addMedia && (
-                <div className="create__post-media">
-                    <button type="button">
-                        <AiOutlineCloseCircle
-                            size={32}
-                            onClick={() => deleteImage()}
-                        />
-                    </button>
-
-                    {media.file ? (
-                        <div className="create__post-media_img">
-                            <img src={media.url} alt="new-content" />
+        <div>
+            {!sendPost ? (
+                <div className="create__post">
+                    <div className="create__post-options">
+                        <div className="autor">
+                            <Avatar imgSrc={images.userImg} />
+                            <span>autor</span>
                         </div>
-                    ) : (
-                        <div className="create__post-media_add">
-                            <label htmlFor="add">
-                                <BiImageAdd size={32} className="icon" />
-                                <input
-                                    id="add"
-                                    type="file"
-                                    accept="image/*"
-                                    hidden
-                                    multiple
-                                    onChange={changeInput}
+                        {!addMedia && (
+                            <button
+                                type="button"
+                                onClick={() => setAddMedia(true)}
+                            >
+                                <FaImages size={32} />
+                            </button>
+                        )}
+                    </div>
+                    <textarea
+                        className="create__post-content"
+                        placeholder="Contenido de la publicación..."
+                        onChange={handleChangeContent}
+                        value={content}
+                    />
+                    {addMedia && (
+                        <div className="create__post-media">
+                            <button type="button">
+                                <AiOutlineCloseCircle
+                                    size={32}
+                                    onClick={() => deleteImage()}
                                 />
-                            </label>
+                            </button>
+
+                            {media.file ? (
+                                <div className="create__post-media_img">
+                                    <img src={media.url} alt="new-content" />
+                                </div>
+                            ) : (
+                                <div className="create__post-media_add">
+                                    <label htmlFor="add">
+                                        <BiImageAdd
+                                            size={32}
+                                            className="icon"
+                                        />
+                                        <input
+                                            id="add"
+                                            type="file"
+                                            accept="image/*"
+                                            hidden
+                                            multiple
+                                            onChange={changeInput}
+                                        />
+                                    </label>
+                                </div>
+                            )}
                         </div>
                     )}
+
+                    <div className="create__post-submit">
+                        <button type="button" onClick={() => publish()}>
+                            Publicar
+                        </button>
+                    </div>
+                </div>
+            ) : (
+                <div className="createPost__loader">
+                    <Loader />
                 </div>
             )}
-
-            <div className="create__post-submit">
-                <button type="button" onClick={() => publish()}>
-                    Publicar
-                </button>
-            </div>
         </div>
     );
 }

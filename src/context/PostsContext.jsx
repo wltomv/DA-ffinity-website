@@ -6,7 +6,8 @@ import useContract from '../hooks/useContract';
 export const PostContext = createContext();
 
 export function PostsProvider({ children }) {
-    const [posts, setPosts] = useState(['hola', 'adios']);
+    const [posts, setPosts] = useState([]);
+    const [loading, setLoading] = useState(false);
     const daffiContract = useContract(DaffiArtifact);
 
     const getPosts = async () => {
@@ -22,11 +23,14 @@ export function PostsProvider({ children }) {
                 content: post.message,
             });
         }
+        console.log(postsCount);
         setPosts(poststemp);
     };
 
     useEffect(() => {
+        setLoading(true);
         getPosts();
+        setLoading(false);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
@@ -34,8 +38,9 @@ export function PostsProvider({ children }) {
         () => ({
             posts,
             setPosts,
+            loading,
         }),
-        [posts, setPosts]
+        [posts, setPosts, loading]
     );
 
     return (
