@@ -11,7 +11,7 @@ function Navbar() {
     const links = ['Inicio', 'Perfil'];
 
     const routes = [
-        { to: '/', text: 'Inicio' },
+        { to: '/home', text: 'Inicio' },
         { to: '/profile', text: 'Perfil' },
     ];
 
